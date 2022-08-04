@@ -55,7 +55,7 @@
                                 @csrf 
                                 @method  ('PUT')
                                 <div class="mb-3"> 
-                                <input type="hidden" id="id" value="{{$banner->id}}">
+                                <input type="hidden" id="id"name= "id" value="{{$banner->id}}">
                                 <label class="col-form-label" for="recipient-name">title</label>
                                 <input class="form-control  @error('title') is-invalid fparsley-error parsley-error @enderror" id="recipient-name" type="text" name="title" value="{{$banner->title}}">
                                @error('image')

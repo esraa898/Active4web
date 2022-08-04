@@ -1,4 +1,5 @@
 @inject('setting', 'App\Models\Setting')
+@inject('socials', 'App\Models\SocialMedia')
 <div class="client-section ptb-100">
         <div class="container">
           <div class="row">
@@ -78,18 +79,12 @@
                 <div class="social-icons social-border circle social-hover mt-5">
                   <h4 class="title">تابعنا</h4>
                   <ul class="list-inline">
+                    <?php  $socials= $socials::get() ?>
+                    @foreach($socials as $social)
                     <li class="social-facebook">
-                      <a href="#"><i class="fab fa-facebook-f"></i></a>
+                      <a href="{{$social->link}}"><i class="fab fa-{{$social->name}}"></i></a>
                     </li>
-                    <li class="social-twitter">
-                      <a href="#"><i class="fab fa-youtube"></i></a>
-                    </li>
-                    <li class="social-gplus">
-                      <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    </li>
-                    <li class="social-instagram">
-                      <a href="#"><i class="fab fa-instagram"></i></a>
-                    </li>
+                   @endforeach
                   </ul>
                 </div>
               </div>

@@ -18,9 +18,9 @@ class SocialMediaSeeder extends Seeder
                  ['name' => 'telegram', 'link' => 'https://www.facebook.com/'],
                  ['name' => 'whatsapp', 'link' => 'https://www.facebook.com/'],
                  ['name' => 'youtube', 'link' => 'https://www.facebook.com/'],
-                 ['name' => 'instgram ', 'link' => 'https://www.facebook.com/'],
+                 ['name' => 'instagram', 'link' => 'https://www.facebook.com/'],
                  ['name'=> 'twitter','link' => 'https://www.facebook.com/'],
-                 ['name'=> 'facebook','link' => 'https://www.facebook.com/']
+                 ['name'=> 'facebook-f','link' => 'https://www.facebook.com/']
             ];
             foreach($socials as $social){
                  SocialMedia::create([

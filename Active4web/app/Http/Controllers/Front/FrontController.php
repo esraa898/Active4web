@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use App\Models\Banners;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 
 class FrontController extends Controller
-{
+{ 
+    protected $bannerModel;
+
+    public function __construct(Banners $banners)
+    {
+        $this->bannerModel=$banners;
+    }
     public function index(){
+
+        $banners =$this->bannerModel::get();
      
-        return view('index');
+        return view('index',compact('banners'));
     }
 
     public function about(){

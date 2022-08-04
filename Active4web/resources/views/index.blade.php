@@ -11,21 +11,14 @@
      
 <div class="main-slide">
         <div id="sync1" class="owl-carousel owl-theme">
+          @foreach($banners as $banner)
           <div class="item">
             <div class="back12">
-              <img src="{{ asset('assets/front/img/nd.png')}}">
+              <img src="{{asset('images/banner/'.$banner->image)}}">
             </div>
           </div>
-          <div class="item">
-            <div class="back12">
-              <img src="{{ asset('assets/front/img/nd.png')}}">
-            </div>
-          </div>
-          <div class="item">
-            <div class="back12">
-              <img src="{{ asset('assets/front/img/nd.png')}}">
-            </div>
-          </div>
+          @endforeach
+          
         </div><!-- sync1 -->
       </div><!-- main-slide -->
       

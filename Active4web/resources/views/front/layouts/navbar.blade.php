@@ -1,4 +1,5 @@
 @inject('setting', 'App\Models\Setting')
+@inject('socials','App\Models\SocialMedia')
     <header>
       <div class="header">
         <div class="top-contacts py-2">
@@ -17,13 +18,11 @@
               </div>
               <div class="col-md-6 col-12 px-0">
                 <div class="left-part">
-                  <a href="#"><i class="fas fa-paper-plane fa-fw"></i></a>
-                  <a href="#"><i class="fas fa-phone fa-fw"></i></a>
-                  <a href="#"><i class="fab fa-whatsapp fa-fw"></i></a>
-                  <a href="#"><i class="fab fa-youtube fa-fw"></i></a>
-                  <a href="#"><i class="fab fa-instagram fa-fw"></i></a>
-                  <a href="#"><i class="fab fa-twitter fa-fw"></i></a>
-                  <a href="#"><i class="fab fa-facebook-f fa-fw"></i></a>
+                <?php  $socials= $socials::get() ?>
+                    @foreach($socials as $social)
+                  <a href="{{$social->link}}"><i class="fab fa-{{$social->name}} "></i></a>
+                  
+                  @endforeach
                 </div>
               </div>
             </div>
