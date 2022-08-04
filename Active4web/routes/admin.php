@@ -33,7 +33,7 @@ Route::group([ 'as'=>'Admin.', 'middleware'=>'auth' ],function(){
                    /*   social media */
   Route::group(['prefix'=> 'socialmedia', 'as' => 'socialmedia.'],function(){
     Route::get('/',[SocialMediaController::class,'index'])->name('index');
-    Route::put('/update/{id)',[SocialMediaController::class,'update'])->name('update');
+    Route::put('/update/{id}',[SocialMediaController::class,'update'])->name('update');
 });
                   
                    /*   banners    */
@@ -41,6 +41,7 @@ Route::group(['prefix'=> 'banner', 'as' => 'banner.'],function(){
     Route::get('/',[BannerController::class,'index'])->name('index');
     Route::get('/create',[BannerController::class,'create'])->name('create');
     Route::post('/store',[BannerController::class,'store'])->name('store');
-    Route::put('/update/{id)',[BannerController::class,'update'])->name('update');
+    Route::put('/update/{id}',[BannerController::class,'update'])->name('update');
+    Route::delete('/delete/{id}',[BannerController::class,'destroy'])->name('destroy');
 });
 });

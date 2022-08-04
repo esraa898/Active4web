@@ -2,7 +2,7 @@
 
 @section('title','banners')
 @section('css')
-<link rel="stylesheet" type="text/css" href="../assets/css/datatables.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css')}}">
 @endsection
 
 @section('content')
@@ -11,8 +11,8 @@
    <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
-                    <h5>Banners</h5><
-
+                    <h5>Banners</h5>
+                      <a class="btn btn-success" href="{{route('Admin.banner.create')}}"> Add Banner</a>
                     
                   </div>
                   <div class="card-body">
@@ -33,15 +33,21 @@
                             @foreach($banners as $key=> $banner)
                           <tr>
                             <td>{{$key +1}}</td>
-                           <td>{{$banner->title}}</td>
+                            <td>{{$banner->title}}</td>
                             <td> <img style= "width:100px;" src="{{asset('images/banner/'.$banner->image)}}"></td>
-                            <td>             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalmdo" data-whatever="@mdo">edit</button></td>
-                      
-                    <div class="modal fade" id="exampleModalmdo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <td>       
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalmdo{{$banner->id}}" data-whatever="@mdo">edit</button>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal{{$banner->id}}">delete</button>
+                          
+                          
+                            </td>
+                          </tr>
+                        <!-- modal edit !-->
+                    <div class="modal fade" id="exampleModalmdo{{$banner->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title">{{$banner->name}}</h5>
+                            <h5 class="modal-title">{{$banner->title}}</h5>
                             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
@@ -49,14 +55,23 @@
                                 @csrf 
                                 @method  ('PUT')
                                 <div class="mb-3"> 
-                                <input type="hidden" id="id" value="{{$banner->id}}"/>
+                                <input type="hidden" id="id" value="{{$banner->id}}">
                                 <label class="col-form-label" for="recipient-name">title</label>
-                                <input class="form-control" id="recipient-name" type="text" name="title" value="{{$banner->title}}">
-                              </div>
+                                <input class="form-control  @error('title') is-invalid fparsley-error parsley-error @enderror" id="recipient-name" type="text" name="title" value="{{$banner->title}}">
+                               @error('image')
+                                            <span class="invalid-feedback text-black font-weight-bold text-capitalize mt-2" role="alert">
+                                              <p>{{ $message }}</p>
+                                            </span>
+                                            @enderror
+                                           </div> 
                               <div class="mb-3">
-                               
                                 <label class="col-form-label" for="recipient-name">image </label>
-                                <input class="form-control" id="recipient-name" name="image" type="file" value="{{$banner->link}}">
+                                <input class="form-control @error('image') is-invalid fparsley-error parsley-error @enderror" id="recipient-name" name="image" type="file" value="{{$banner->link}}">
+                                @error('image')
+                                            <span class="invalid-feedback text-black font-weight-bold text-capitalize mt-2" role="alert">
+                                              <p>{{ $message }}</p>
+                                            </span>
+                                            @enderror
                               </div>
                             
                            
@@ -69,9 +84,30 @@
                         </div>
                       </div>
                     </div>
-                        <  
-                          </tr>
-                         @endforeach
+                         <!-- modal delete !-->
+                    <div class="modal fade" id="exampleModal{{$banner->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">delete Banner</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                          <form method="post" action="{{route('Admin.banner.destroy',$banner->id)}}">
+                            @csrf 
+                            @method('DELETE')
+                          <p> Are you sure you want to delete this banner ?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-secondary" type="submit">Delete</button>
+                          </div>
+                           </form>
+                        </div>
+                      </div>
+                    </div>
+                           
+                       @endforeach
                         </tbody>
                         <tfoot>
                           <tr>
@@ -82,7 +118,7 @@
                           </tr>
                         </tfoot>
                       </table>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -90,10 +126,8 @@
 @endsection
 
 @section('js')
-<script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
-    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+<script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('../assets/js/datatable/datatables/datatable.custom.js')}}"></script>
     <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/theme-customizer/customizer.js"></script>  <script src="../assets/js/tooltip-init.js"></script>
+     <script src="{{ asset('assets/js/tooltip-init.js')}}"></script>
 @endsection

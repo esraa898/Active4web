@@ -2,7 +2,8 @@
 
 @section('title','Socialmedia')
 @section('css')
-<link rel="stylesheet" type="text/css" href="../assets/css/datatables.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css')}}">
+
 @endsection
 
 @section('content')
@@ -35,9 +36,14 @@
                             <td>{{$key +1}}</td>
                            <td>{{$social->name}}</td>
                             <td>{{$social->link}}</td>
-                            <td>             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalmdo" data-whatever="@mdo">edit</button></td>
+                            <td>            
+                              
+                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalmdo{{$social->id}}" data-whatever="@mdo">edit</button>
+                            </td>
+                          </tr>
+  
                       
-                    <div class="modal fade" id="exampleModalmdo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModalmdo{{$social->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -64,8 +70,7 @@
                         </div>
                       </div>
                     </div>
-                        <  
-                          </tr>
+                      
                          @endforeach
                         </tbody>
                         <tfoot>
@@ -84,10 +89,8 @@
 @endsection
 
 @section('js')
-<script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
-    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+<<script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('../assets/js/datatable/datatables/datatable.custom.js')}}"></script>
     <!-- Plugins JS Ends-->
-    <!-- Theme js-->
-    <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/theme-customizer/customizer.js"></script>  <script src="../assets/js/tooltip-init.js"></script>
+     <script src="{{ asset('assets/js/tooltip-init.js')}}"></script>
 @endsection

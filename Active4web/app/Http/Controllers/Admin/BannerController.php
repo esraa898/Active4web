@@ -8,6 +8,7 @@ use App\Http\Traits\ImageTrait;
 use PhpParser\Node\Expr\FuncCall;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Banners\CreateBannerRequest;
+use App\Http\Requests\Admin\Banners\UpdateBannerRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BannerController extends Controller
@@ -45,5 +46,35 @@ class BannerController extends Controller
     ]);
     Alert::success('success', 'Banner added  Successfully');
     return redirect(route('Admin.banner.index'));
+    }
+
+
+    public function update(UpdateBannerRequest $request,$id){
+     
+         $banner= $this->bannerModel::find($id);
+        if ($request->hasFile('image')) {
+            $filename = time() . '.' . $request->image->extension();
+            $image =  $this->uploadImage($request->image, $filename, 'banner');
+            unlink(public_path('images/banner/'.$banner->image));
+            
+        }
+      
+        $banner->update([
+          'title'=> $request->title,
+          'image' => $image ?? $request->image,
+
+        ]);
+        Alert::success('success', 'Banner updated  Successfully');
+        return redirect(route('Admin.banner.index'));
+    }
+
+
+    public function destroy($id){
+        $banner= $this->bannerModel::findorfail($id);
+        if($banner){
+            $banner->delete();
+        }
+        Alert::success('success', 'Banner deleted  Successfully');
+        return redirect(route('Admin.banner.index'));
     }
 }

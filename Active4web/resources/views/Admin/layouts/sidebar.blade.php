@@ -26,7 +26,7 @@
                                 data-feather="airplay"></i><span>SocialMedia</span></a>
                         
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="{{route('Admin.banner.create')}}"><i
+                    <li class="dropdown"><a class="nav-link menu-title" href="{{route('Admin.banner.index')}}"><i
                                 data-feather="layout"></i><span>Banners</span></a>
                        
                     </li>
